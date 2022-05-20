@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <head>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    </head>
+    <h2>Pizza Sopranos</h2>
+    <h3>categorieën</h3>
+{% for category in categories %}
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ category.image }}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{ category.naam }}</h5>
+        <a href="{{ path('app_category', { id:category.id }) }}" class="btn btn-primary">Alle pizza's</a>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}
