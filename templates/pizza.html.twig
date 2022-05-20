@@ -11,7 +11,7 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">{{ pizza.naam }}</h5>
-            <a href="#" class="btn btn-primary">Bestellen</a>
+            <a href="{{ path('app_order', {'id': 'x'}) }}" class="btn btn-primary">Bestellen</a>
         </div>
     </div>
     {% endfor %}
