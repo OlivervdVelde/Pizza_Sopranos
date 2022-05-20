@@ -27,10 +27,9 @@ class PizzaController extends AbstractController
      * @Route("/category/{id}", name="app_category")
      */
     public function pizza($id,CategoryRepository $category, PizzaRepository $pizzaRepository){
-        {
-        $pizza = $pizzaRepository->findBy(["category" => $id]);
+        $pizzas = $pizzaRepository->findBy(["category" => $id]);
 
-        return $this->render("pizza.html.twig");
-        }
+        return $this->render("pizza.html.twig",
+        ['pizzas' => $pizzas]);
     }
 }
