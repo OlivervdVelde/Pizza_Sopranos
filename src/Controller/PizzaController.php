@@ -15,7 +15,7 @@ class PizzaController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function homepage(CategoryRepository $category) : Response
+    public function homepage(CategoryRepository $category): Response
     {
         $categories = $category->findAll();
         return $this->render("home.html.twig", ['categories' => $categories
@@ -23,13 +23,15 @@ class PizzaController extends AbstractController
             ]
         );
     }
+
     /**
      * @Route("/category/{id}", name="app_category")
      */
-    public function pizza($id,CategoryRepository $category, PizzaRepository $pizzaRepository){
+    public function pizza($id, CategoryRepository $category, PizzaRepository $pizzaRepository)
+    {
         $pizzas = $pizzaRepository->findBy(["category" => $id]);
 
         return $this->render("pizza.html.twig",
-        ['pizzas' => $pizzas]);
+            ['pizzas' => $pizzas]);
     }
 }
