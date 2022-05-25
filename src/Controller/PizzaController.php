@@ -34,4 +34,11 @@ class PizzaController extends AbstractController
         return $this->render("pizza.html.twig",
             ['pizzas' => $pizzas]);
     }
+    /**
+     * @Route("/done", name="app_done")
+     */
+    public function done(): Response
+    {
+        return $this->render("done.html.twig");
+    }
 }

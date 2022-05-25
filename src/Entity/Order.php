@@ -54,6 +54,12 @@ class Order
      */
     private $pizza;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Size::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $size;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,4 +148,17 @@ class Order
 
         return $this;
     }
+
+    public function getSize(): ?Size
+    {
+        return $this->size;
+    }
+
+    public function setSize(?Size $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
 }

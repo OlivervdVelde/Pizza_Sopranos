@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\Size;
 use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Category;
@@ -20,9 +21,9 @@ class OrderController extends AbstractController
     /**
      * @Route("/order/{id}", name="app_order");
      */
-    public function order(Request $request, Pizza $pizza, $id, OrderRepository $orderRepository){
-        $pizzaName = $pizza->getNaam();
+    public function order(Request $request, PizzaRepository $pizza, $id, OrderRepository $orderRepository){
 
+        $pizza = $pizza->find($id);
         $order = new Order();
         $order->setStatus("in progress");
         $form = $this->createFormBuilder($order)
@@ -32,6 +33,7 @@ class OrderController extends AbstractController
             ->add('city', TextType::class)
             ->add('zipcode', TextType::class)
             ->add('status', TextType::class)
+            ->add('size', TextType::class)
 
             ->add('Submit', SubmitType::class, ['label' =>
             'verzenden'])
@@ -42,10 +44,13 @@ class OrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $order = $form->getData();
+            $order->setPizza($pizza);
             $orderRepository->add($order);
 
-            return $this->redirectToRoute('app_contact');
+            return $this->redirectToRoute('app_done');
         }
+        return $this->render('order.html.twig',  [
+            'form' => $form->createView()]);
     }
 
 }
